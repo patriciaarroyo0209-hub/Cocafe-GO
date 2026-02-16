@@ -2,150 +2,127 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Cocafé Go</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cocafé Go</title>
 <style>
-body{
-margin:0;
-font-family: Arial, sans-serif;
-background:#f5f1ea;
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
 }
-.sidebar{
-width:220px;
-background:#2f4f3a;
-height:100vh;
-position:fixed;
-color:white;
-padding:15px;
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
 }
-.sidebar h2{
-text-align:center;
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-.sidebar button{
-width:100%;
-padding:10px;
-margin:8px 0;
-border:none;
-border-radius:6px;
-background:#6b8e23;
-color:white;
-font-size:14px;
-cursor:pointer;
+h2 {
+    text-align: center;
+    color: #ff7a00;
 }
-.sidebar button:hover{
-background:#9acd32;
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
-.main{
-margin-left:240px;
-padding:20px;
+button {
+    background: #ff7a00;
+    color: white;
+    font-weight: bold;
+    border: none;
 }
-.card{
-background:white;
-border-radius:10px;
-padding:15px;
-margin-bottom:15px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
+.menu {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
 }
-.hidden{
-display:none;
+.menu button {
+    width: 30%;
 }
-.header{
-background:#d4af37;
-padding:10px;
-border-radius:8px;
-margin-bottom:15px;
+.hidden {
+    display: none;
 }
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-}
-.btn{
-background:#d4af37;
-border:none;
-padding:10px;
-border-radius:6px;
-color:black;
-cursor:pointer;
-}
-input,select{
-width:100%;
-padding:8px;
-margin:5px 0;
+.item {
+    background: #eee;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
 }
 </style>
 </head>
-
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-<h2>COCAFÉ GO</h2>
-<button onclick="show('dashboard')">Panel Principal</button>
-<button onclick="show('licitacion')">Nueva Licitación</button>
-<button onclick="show('ofertas')">Evaluación Ofertas</button>
-<button onclick="show('seguimiento')">Seguimiento</button>
+<div class="container">
+
+<!-- LOGIN -->
+<div id="login" class="card">
+<h2>Cocafé Go</h2>
+<input type="text" id="user" placeholder="Usuario">
+<input type="password" id="pass" placeholder="Contraseña">
+<button onclick="login()">Ingresar</button>
+<p style="text-align:center;font-size:12px;">(Simulación)</p>
 </div>
 
-<div class="main">
+<!-- HOME -->
+<div id="home" class="card hidden">
+<h2>Bienvenido ☕</h2>
+<p>Hola, usuario Cocafé</p>
 
-<div class="header">
-<h3>Gestión de Comercialización de Cacao</h3>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" class="section">
-<div class="grid">
-<div class="card">
-<h4>Ventas del día</h4>
-<p>S/ 5,200</p>
-</div>
-<div class="card">
-<h4>Compras pendientes</h4>
-<p>3</p>
-</div>
-<div class="card">
-<h4>Inventario</h4>
-<p>10.7 Tn</p>
-</div>
+<div class="menu">
+<button onclick="showScreen('menu')">Menú</button>
+<button onclick="showScreen('pedidos')">Pedidos</button>
+<button onclick="showScreen('perfil')">Perfil</button>
 </div>
 
-<div class="card">
-<h4>Operaciones recientes</h4>
-<ul>
-<li>Proveedor A - Compra 1000kg</li>
-<li>Proveedor B - Compra 1200kg</li>
-<li>Proveedor C - Compra 900kg</li>
-</ul>
-<button class="btn">Publicar Licitación</button>
-</div>
+<div id="menu" class="hidden">
+<h3>Menú</h3>
+<div class="item">☕ Café Americano - S/ 5.00</div>
+<div class="item">🥐 Croissant - S/ 4.00</div>
+<div class="item">🥪 Sandwich - S/ 7.00</div>
+<button onclick="alert('Pedido simulado')">Pedir</button>
 </div>
 
-<!-- LICITACION -->
-<div id="licitacion" class="section hidden">
-<div class="card">
-<h3>Nueva Licitación</h3>
-<label>Tipo</label>
-<select>
-<option>Compra</option>
-<option>Venta</option>
-</select>
-<label>Volumen (kg)</label>
-<input type="number">
-<label>Fecha límite</label>
-<input type="date">
-<label>Requisitos de calidad</label>
-<input type="text">
-<button class="btn">Publicar Licitación</button>
-</div>
+<div id="pedidos" class="hidden">
+<h3>Mis pedidos</h3>
+<div class="item">Pedido #001 - En preparación</div>
+<div class="item">Pedido #002 - Entregado</div>
 </div>
 
-<!-- OFERTAS -->
-<div id="ofertas" class="section hidden">
-<div class="card">
-<h3>Evaluación de Ofertas</h3>
-<table width="100%">
-<tr><th>Proveedor</th><th>Precio</th><th>Calidad</th><th>Acción</th></tr>
-<tr><td>A</td><td>S/ 5.20</td><td>Alta</td><td><button class="btn">Aceptar</button></td></tr>
-<tr><td>B</td><td>S/ 5.00</td><td>Media</td><td><button class="btn">Rechazar</button></td></tr>
-<tr><td>C</td><td>S/ 5.10</td><td>Alta</td><td><button c
+<div id="perfil" class="hidden">
+<h3>Perfil</h3>
+<p>Usuario: demo</p>
+<p>Rol: trabajador</p>
+<button onclick="logout()">Cerrar sesión</button>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function login(){
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("home").classList.remove("hidden");
+}
+
+function logout(){
+    location.reload();
+}
+
+function showScreen(screen){
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("pedidos").classList.add("hidden");
+    document.getElementById("perfil").classList.add("hidden");
+    document.getElementById(screen).classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
