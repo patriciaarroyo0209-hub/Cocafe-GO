@@ -3,206 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cocafé Go - Gestión Comercial</title>
+<title>Cocafe Go</title>
 <style>
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:#f2f2f2;
+background:#f7f3ee;
 }
-header{
-background:#ff7a00;
-color:white;
-padding:15px;
-text-align:center;
-font-weight:bold;
-}
-.container{
-display:flex;
-min-height:100vh;
-}
-.sidebar{
-width:220px;
-background:#111;
-color:white;
-padding:15px;
-}
-.sidebar h3{
-color:#ff7a00;
-}
-.sidebar button{
-width:100%;
-margin:5px 0;
-padding:10px;
-background:#333;
-color:white;
-border:none;
-border-radius:6px;
-}
-.sidebar button:hover{
-background:#ff7a00;
-}
-.main{
-flex:1;
+.app{
+max-width:1100px;
+margin:auto;
 padding:20px;
 }
-.card{
+.screens{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+.screen{
+width:200px;
 background:white;
+border-radius:20px;
+box-shadow:0 0 15px rgba(0,0,0,.1);
 padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-margin-bottom:15px;
 }
-table{
-width:100%;
-border-collapse:collapse;
-}
-th,td{
-border:1px solid #ccc;
-padding:8px;
+.header{
 text-align:center;
+font-weight:bold;
+color:#2f4f3a;
+margin-bottom:10px;
 }
-th{
-background:#ff7a00;
-color:white;
+input, select, textarea{
+width:100%;
+padding:7px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-bottom:8px;
 }
-.hidden{
-display:none;
-}
-input,select{
+button{
 width:100%;
 padding:8px;
-margin-top:5px;
-border-radius:5px;
-border:1px solid #ccc;
-}
-button.action{
-background:#ff7a00;
-color:white;
-padding:8px 12px;
 border:none;
+border-radius:8px;
+background:#5a6f3c;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+button.secondary{
+background:#d6b14a;
+}
+.menu{
+display:flex;
+flex-direction:column;
+gap:6px;
+margin-bottom:10px;
+}
+.menu div{
+background:#f2f2f2;
+padding:6px;
 border-radius:6px;
-margin-top:10px;
+font-size:13px;
+}
+.card{
+background:#f7f7f7;
+padding:8px;
+border-radius:8px;
+margin-bottom:6px;
+font-size:12px;
+}
+.badge{
+background:#d6b14a;
+padding:3px 6px;
+border-radius:6px;
+font-size:11px;
+color:black;
+}
+.table{
+font-size:12px;
+}
+.row{
+display:flex;
+justify-content:space-between;
+margin-bottom:4px;
+}
+.accept{color:green;font-weight:bold;}
+.reject{color:red;font-weight:bold;}
+.progress{
+background:#ddd;
+border-radius:5px;
+overflow:hidden;
+margin:5px 0;
+}
+.bar{
+background:#5a6f3c;
+width:70%;
+height:8px;
 }
 </style>
 </head>
 <body>
 
-<header>☕ Cocafé Go - Sistema de Gestión Comercial</header>
+<div class="app">
+<div class="screens">
 
-<div class="container">
-
-<div class="sidebar">
-<h3>Menú</h3>
-<button onclick="show('dashboard')">Dashboard</button>
-<button onclick="show('licitacion')">Licitaciones</button>
-<button onclick="show('ordenes')">Órdenes de Compra</button>
-<button onclick="show('envios')">Seguimiento de Envíos</button>
-<button onclick="show('reportes')">Reportes</button>
+<!-- 1 LOGIN -->
+<div class="screen">
+<div class="header">COCAFE GO</div>
+<input placeholder="Usuario">
+<input type="password" placeholder="Contraseña">
+<button onclick="alert('Ingreso simulado')">Ingresar</button>
 </div>
 
-<div class="main">
-
-<!-- DASHBOARD -->
-<div id="dashboard" class="card">
-<h2>Panel General</h2>
-<p>Estado general de operaciones</p>
-<ul>
-<li>Licitaciones activas: 2</li>
-<li>Órdenes en proceso: 3</li>
-<li>Envíos en tránsito: 2</li>
-</ul>
+<!-- 2 DASHBOARD -->
+<div class="screen">
+<div class="header">Dashboard</div>
+<div class="menu">
+<div>📊 Dashboard</div>
+<div>📄 Licitaciones</div>
+<div>🚚 Seguimiento</div>
+<div>📑 Reportes</div>
+</div>
+<div class="card">
+<b>Operaciones recientes</b>
+<div class="row"><span>Proveedor A</span><span class="badge">Activa</span></div>
+<div class="row"><span>Proveedor B</span><span class="badge">En proceso</span></div>
+</div>
+<button>Nueva licitación</button>
 </div>
 
-<!-- LICITACION -->
-<div id="licitacion" class="card hidden">
-<h2>Licitación de Proveedores</h2>
-
-<table>
-<tr>
-<th>Proveedor</th><th>Precio/kg</th><th>Calidad</th><th>Volumen</th><th>Entrega</th><th>Estado</th>
-</tr>
-<tr>
-<td>Proveedor Andino</td><td>S/ 8.20</td><td>A</td><td>1000 kg</td><td>5 días</td><td>En evaluación</td>
-</tr>
-<tr>
-<td>Coop. Amazonía</td><td>S/ 7.90</td><td>B</td><td>1500 kg</td><td>7 días</td><td>Seleccionado</td>
-</tr>
-</table>
-
-<h3>Publicar nueva licitación</h3>
-<input placeholder="Cantidad requerida (kg)">
-<input placeholder="Calidad requerida">
-<input placeholder="Fecha límite">
-<button class="action" onclick="alert('Licitación publicada (simulado)')">Publicar</button>
+<!-- 3 NUEVA LICITACION -->
+<div class="screen">
+<div class="header">Nueva Licitación</div>
+<label>Tipo operación</label>
+<select>
+<option>Compra</option>
+<option>Venta</option>
+</select>
+<label>Producto</label>
+<input value="Cacao">
+<label>Volumen</label>
+<input value="1000 kg">
+<label>Calidad</label>
+<textarea>Grado A - Fermentado</textarea>
+<label>Fecha límite</label>
+<input type="date">
+<button class="secondary">Publicar</button>
 </div>
 
-<!-- ORDENES -->
-<div id="ordenes" class="card hidden">
-<h2>Órdenes de Compra</h2>
-
-<table>
-<tr>
-<th>ID</th><th>Proveedor</th><th>Estado</th><th>Fecha</th>
-</tr>
-<tr>
-<td>OC-001</td><td>Proveedor Andino</td><td>En proceso</td><td>10/02/2026</td>
-</tr>
-<tr>
-<td>OC-002</td><td>Coop. Amazonía</td><td>Completada</td><td>08/02/2026</td>
-</tr>
-</table>
-
-<button class="action" onclick="alert('Orden generada automáticamente (simulado)')">Generar nueva Orden</button>
+<!-- 4 EVALUAR OFERTAS -->
+<div class="screen">
+<div class="header">Licitación Abierta</div>
+<div class="card">
+<div class="row"><b>Proveedor A</b><span>$2.25</span></div>
+<div class="row"><span>Calidad A</span><span class="accept">Aceptar</span></div>
 </div>
-
-<!-- ENVIOS -->
-<div id="envios" class="card hidden">
-<h2>Seguimiento de Envíos</h2>
-
-<table>
-<tr>
-<th>ID Envío</th><th>Destino</th><th>Estado</th><th>Ubicación</th>
-</tr>
-<tr>
-<td>E-101</td><td>Almacén Lima</td><td>En tránsito</td><td>Huánuco</td>
-</tr>
-<tr>
-<td>E-102</td><td>Planta Central</td><td>Entregado</td><td>Lima</td>
-</tr>
-</table>
+<div class="card">
+<div class="row"><b>Proveedor B</b><span>$2.30</span></div>
+<div class="row"><span>Calidad B</span><span class="reject">Rechazar</span></div>
 </div>
+<div class="card">
+<div class="row"><b>Proveedor C</b><span>$2.10</span></div>
+<div class="row"><span>Calidad A</span><span
 
-<!-- REPORTES -->
-<div id="reportes" class="card hidden">
-<h2>Reportes Automáticos</h2>
 
-<p>Reporte de operaciones</p>
-<ul>
-<li>Total compras del mes: 2500 kg</li>
-<li>Costo promedio: S/ 8.05/kg</li>
-<li>Proveedores activos: 3</li>
-</ul>
-
-<button class="action" onclick="alert('Reporte descargado en PDF (simulado)')">Generar Reporte</button>
-</div>
-
-</div>
-</div>
-
-<script>
-function show(section){
-document.getElementById("dashboard").classList.add("hidden");
-document.getElementById("licitacion").classList.add("hidden");
-document.getElementById("ordenes").classList.add("hidden");
-document.getElementById("envios").classList.add("hidden");
-document.getElementById("reportes").classList.add("hidden");
-
-document.getElementById(section).classList.remove("hidden");
-}
-</script>
-
-</body>
-</html>
 
 
