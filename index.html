@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cocafé Go</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f4;
+}
+header {
+  background: #6f4e37;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+.container {
+  padding: 15px;
+}
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+button {
+  background: #d2691e;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+button:hover {
+  background: #a0522d;
+}
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+.menu button {
+  margin-bottom: 10px;
+}
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Cocafé Go</h2>
+<p>Gestión de compra y venta de cacao</p>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="login" class="card">
+<h3>Iniciar sesión</h3>
+<input type="text" placeholder="Usuario">
+<input type="password" placeholder="Contraseña">
+<button onclick="showMenu()">Ingresar</button>
+</div>
+
+<!-- MENU -->
+<div id="menu" class="card hidden menu">
+<h3>Menú Principal</h3>
+<button onclick="showSection('proveedores')">Registro de Proveedores</button>
+<button onclick="showSection('licitacion')">Licitación</button>
+<button onclick="showSection('seguimiento')">Seguimiento</button>
+<button onclick="showSection('reportes')">Reportes</button>
+<button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<!-- PROVEEDORES -->
+<div id="proveedores" class="card hidden">
+<h3>Registro de Proveedores</h3>
+<input type="text" placeholder="Nombre del proveedor">
+<input type="number" placeholder="Volumen (kg)">
+<select>
+<option>Calidad A</option>
+<option>Calidad B</option>
+<option>Calidad C</option>
+</select>
+<input type="text" placeholder="Certificación">
+<button>Guardar proveedor</button>
+<button onclick="backMenu()">Volver</button>
+</div>
+
+<!-- LICITACION -->
+<div id="licitacion" class="card hidden">
+<h3>Licitación</h3>
+<input type="text" placeholder="Producto">
+<input type="number" placeholder="Precio ofertado">
+<input type="date">
+<button>Enviar oferta</button>
+<button onclick="backMenu()">Volver</button>
+</div>
+
+<!-- SEGUIMIENTO -->
+<div id="seguimiento" class="card hidden">
+<h3>Seguimiento de pedidos</h3>
+<p>Pedido #001 - En proceso</p>
+<p>Pedido #002 - Entregado</p>
+<button onclick="backMenu()">Volver</button>
+</div>
+
+<!-- REPORTES -->
+<div id="reportes" class="card hidden">
+<h3>Reportes</h3>
+<p>Total compras: S/ 12,000</p>
+<p>Proveedores activos: 5</p>
+<button onclick="backMenu()">Volver</button>
+</div>
+
+</div>
+
+<script>
+function showMenu() {
+document.getElementById("login").classList.add("hidden");
+document.getElementById("menu").classList.remove("hidden");
+}
+
+function showSection(id) {
+document.getElementById("menu").classList.add("hidden");
+document.getElementById(id).classList.remove("hidden");
+}
+
+function backMenu() {
+document.getElementById("proveedores").classList.add("hidden");
+document.getElementById("licitacion").classList.add("hidden");
+document.getElementById("seguimiento").classList.add("hidden");
+document.getElementById("reportes").classList.add("hidden");
+document.getElementById("menu").classList.remove("hidden");
+}
+
+function logout() {
+document.getElementById("menu").classList.add("hidden");
+document.getElementById("login").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
