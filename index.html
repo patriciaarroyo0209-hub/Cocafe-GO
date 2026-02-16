@@ -3,126 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cocafé Go</title>
+<title>Cocafé Go - Gestión Comercial</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    margin: 0;
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f2f2f2;
 }
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
+header{
+background:#ff7a00;
+color:white;
+padding:15px;
+text-align:center;
+font-weight:bold;
 }
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.container{
+display:flex;
+min-height:100vh;
 }
-h2 {
-    text-align: center;
-    color: #ff7a00;
+.sidebar{
+width:220px;
+background:#111;
+color:white;
+padding:15px;
 }
-input, button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+.sidebar h3{
+color:#ff7a00;
 }
-button {
-    background: #ff7a00;
-    color: white;
-    font-weight: bold;
-    border: none;
+.sidebar button{
+width:100%;
+margin:5px 0;
+padding:10px;
+background:#333;
+color:white;
+border:none;
+border-radius:6px;
 }
-.menu {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
+.sidebar button:hover{
+background:#ff7a00;
 }
-.menu button {
-    width: 30%;
+.main{
+flex:1;
+padding:20px;
 }
-.hidden {
-    display: none;
+.card{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+margin-bottom:15px;
 }
-.item {
-    background: #eee;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 8px;
+table{
+width:100%;
+border-collapse:collapse;
+}
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+th{
+background:#ff7a00;
+color:white;
+}
+.hidden{
+display:none;
+}
+input,select{
+width:100%;
+padding:8px;
+margin-top:5px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+button.action{
+background:#ff7a00;
+color:white;
+padding:8px 12px;
+border:none;
+border-radius:6px;
+margin-top:10px;
 }
 </style>
 </head>
 <body>
 
+<header>☕ Cocafé Go - Sistema de Gestión Comercial</header>
+
 <div class="container">
 
-<!-- LOGIN -->
-<div id="login" class="card">
-<h2>Cocafé Go</h2>
-<input type="text" id="user" placeholder="Usuario">
-<input type="password" id="pass" placeholder="Contraseña">
-<button onclick="login()">Ingresar</button>
-<p style="text-align:center;font-size:12px;">(Simulación)</p>
-</div>
-
-<!-- HOME -->
-<div id="home" class="card hidden">
-<h2>Bienvenido ☕</h2>
-<p>Hola, usuario Cocafé</p>
-
-<div class="menu">
-<button onclick="showScreen('menu')">Menú</button>
-<button onclick="showScreen('pedidos')">Pedidos</button>
-<button onclick="showScreen('perfil')">Perfil</button>
-</div>
-
-<div id="menu" class="hidden">
+<div class="sidebar">
 <h3>Menú</h3>
-<div class="item">☕ Café Americano - S/ 5.00</div>
-<div class="item">🥐 Croissant - S/ 4.00</div>
-<div class="item">🥪 Sandwich - S/ 7.00</div>
-<button onclick="alert('Pedido simulado')">Pedir</button>
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('licitacion')">Licitaciones</button>
+<button onclick="show('ordenes')">Órdenes de Compra</button>
+<button onclick="show('envios')">Seguimiento de Envíos</button>
+<button onclick="show('reportes')">Reportes</button>
 </div>
 
-<div id="pedidos" class="hidden">
-<h3>Mis pedidos</h3>
-<div class="item">Pedido #001 - En preparación</div>
-<div class="item">Pedido #002 - Entregado</div>
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="card">
+<h2>Panel General</h2>
+<p>Estado general de operaciones</p>
+<ul>
+<li>Licitaciones activas: 2</li>
+<li>Órdenes en proceso: 3</li>
+<li>Envíos en tránsito: 2</li>
+</ul>
 </div>
 
-<div id="perfil" class="hidden">
-<h3>Perfil</h3>
-<p>Usuario: demo</p>
-<p>Rol: trabajador</p>
-<button onclick="logout()">Cerrar sesión</button>
+<!-- LICITACION -->
+<div id="licitacion" class="card hidden">
+<h2>Licitación de Proveedores</h2>
+
+<table>
+<tr>
+<th>Proveedor</th><th>Precio/kg</th><th>Calidad</th><th>Volumen</th><th>Entrega</th><th>Estado</th>
+</tr>
+<tr>
+<td>Proveedor Andino</td><td>S/ 8.20</td><td>A</td><td>1000 kg</td><td>5 días</td><td>En evaluación</td>
+</tr>
+<tr>
+<td>Coop. Amazonía</td><td>S/ 7.90</td><td>B</td><td>1500 kg</td><td>7 días</td><td>Seleccionado</td>
+</tr>
+</table>
+
+<h3>Publicar nueva licitación</h3>
+<input placeholder="Cantidad requerida (kg)">
+<input placeholder="Calidad requerida">
+<input placeholder="Fecha límite">
+<button class="action" onclick="alert('Licitación publicada (simulado)')">Publicar</button>
+</div>
+
+<!-- ORDENES -->
+<div id="ordenes" class="card hidden">
+<h2>Órdenes de Compra</h2>
+
+<table>
+<tr>
+<th>ID</th><th>Proveedor</th><th>Estado</th><th>Fecha</th>
+</tr>
+<tr>
+<td>OC-001</td><td>Proveedor Andino</td><td>En proceso</td><td>10/02/2026</td>
+</tr>
+<tr>
+<td>OC-002</td><td>Coop. Amazonía</td><td>Completada</td><td>08/02/2026</td>
+</tr>
+</table>
+
+<button class="action" onclick="alert('Orden generada automáticamente (simulado)')">Generar nueva Orden</button>
+</div>
+
+<!-- ENVIOS -->
+<div id="envios" class="card hidden">
+<h2>Seguimiento de Envíos</h2>
+
+<table>
+<tr>
+<th>ID Envío</th><th>Destino</th><th>Estado</th><th>Ubicación</th>
+</tr>
+<tr>
+<td>E-101</td><td>Almacén Lima</td><td>En tránsito</td><td>Huánuco</td>
+</tr>
+<tr>
+<td>E-102</td><td>Planta Central</td><td>Entregado</td><td>Lima</td>
+</tr>
+</table>
+</div>
+
+<!-- REPORTES -->
+<div id="reportes" class="card hidden">
+<h2>Reportes Automáticos</h2>
+
+<p>Reporte de operaciones</p>
+<ul>
+<li>Total compras del mes: 2500 kg</li>
+<li>Costo promedio: S/ 8.05/kg</li>
+<li>Proveedores activos: 3</li>
+</ul>
+
+<button class="action" onclick="alert('Reporte descargado en PDF (simulado)')">Generar Reporte</button>
 </div>
 
 </div>
-
 </div>
 
 <script>
-function login(){
-    document.getElementById("login").classList.add("hidden");
-    document.getElementById("home").classList.remove("hidden");
-}
+function show(section){
+document.getElementById("dashboard").classList.add("hidden");
+document.getElementById("licitacion").classList.add("hidden");
+document.getElementById("ordenes").classList.add("hidden");
+document.getElementById("envios").classList.add("hidden");
+document.getElementById("reportes").classList.add("hidden");
 
-function logout(){
-    location.reload();
-}
-
-function showScreen(screen){
-    document.getElementById("menu").classList.add("hidden");
-    document.getElementById("pedidos").classList.add("hidden");
-    document.getElementById("perfil").classList.add("hidden");
-    document.getElementById(screen).classList.remove("hidden");
+document.getElementById(section).classList.remove("hidden");
 }
 </script>
 
 </body>
 </html>
+
+
