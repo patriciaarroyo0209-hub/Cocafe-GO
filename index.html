@@ -2,151 +2,150 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cocafé Go</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f4f4f4;
+body{
+margin:0;
+font-family: Arial, sans-serif;
+background:#f5f1ea;
 }
-header {
-  background: #6f4e37;
-  color: white;
-  padding: 15px;
-  text-align: center;
+.sidebar{
+width:220px;
+background:#2f4f3a;
+height:100vh;
+position:fixed;
+color:white;
+padding:15px;
 }
-.container {
-  padding: 15px;
+.sidebar h2{
+text-align:center;
 }
-.card {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+.sidebar button{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:none;
+border-radius:6px;
+background:#6b8e23;
+color:white;
+font-size:14px;
+cursor:pointer;
 }
-button {
-  background: #d2691e;
-  color: white;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  border-radius: 8px;
-  font-size: 16px;
-  margin-top: 10px;
+.sidebar button:hover{
+background:#9acd32;
 }
-button:hover {
-  background: #a0522d;
+.main{
+margin-left:240px;
+padding:20px;
 }
-input, select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+.card{
+background:white;
+border-radius:10px;
+padding:15px;
+margin-bottom:15px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
-.menu button {
-  margin-bottom: 10px;
+.hidden{
+display:none;
 }
-.hidden {
-  display: none;
+.header{
+background:#d4af37;
+padding:10px;
+border-radius:8px;
+margin-bottom:15px;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+.btn{
+background:#d4af37;
+border:none;
+padding:10px;
+border-radius:6px;
+color:black;
+cursor:pointer;
+}
+input,select{
+width:100%;
+padding:8px;
+margin:5px 0;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h2>Cocafé Go</h2>
-<p>Gestión de compra y venta de cacao</p>
-</header>
-
-<div class="container">
-
-<!-- LOGIN -->
-<div id="login" class="card">
-<h3>Iniciar sesión</h3>
-<input type="text" placeholder="Usuario">
-<input type="password" placeholder="Contraseña">
-<button onclick="showMenu()">Ingresar</button>
+<!-- SIDEBAR -->
+<div class="sidebar">
+<h2>COCAFÉ GO</h2>
+<button onclick="show('dashboard')">Panel Principal</button>
+<button onclick="show('licitacion')">Nueva Licitación</button>
+<button onclick="show('ofertas')">Evaluación Ofertas</button>
+<button onclick="show('seguimiento')">Seguimiento</button>
 </div>
 
-<!-- MENU -->
-<div id="menu" class="card hidden menu">
-<h3>Menú Principal</h3>
-<button onclick="showSection('proveedores')">Registro de Proveedores</button>
-<button onclick="showSection('licitacion')">Licitación</button>
-<button onclick="showSection('seguimiento')">Seguimiento</button>
-<button onclick="showSection('reportes')">Reportes</button>
-<button onclick="logout()">Cerrar sesión</button>
+<div class="main">
+
+<div class="header">
+<h3>Gestión de Comercialización de Cacao</h3>
 </div>
 
-<!-- PROVEEDORES -->
-<div id="proveedores" class="card hidden">
-<h3>Registro de Proveedores</h3>
-<input type="text" placeholder="Nombre del proveedor">
-<input type="number" placeholder="Volumen (kg)">
-<select>
-<option>Calidad A</option>
-<option>Calidad B</option>
-<option>Calidad C</option>
-</select>
-<input type="text" placeholder="Certificación">
-<button>Guardar proveedor</button>
-<button onclick="backMenu()">Volver</button>
+<!-- DASHBOARD -->
+<div id="dashboard" class="section">
+<div class="grid">
+<div class="card">
+<h4>Ventas del día</h4>
+<p>S/ 5,200</p>
+</div>
+<div class="card">
+<h4>Compras pendientes</h4>
+<p>3</p>
+</div>
+<div class="card">
+<h4>Inventario</h4>
+<p>10.7 Tn</p>
+</div>
+</div>
+
+<div class="card">
+<h4>Operaciones recientes</h4>
+<ul>
+<li>Proveedor A - Compra 1000kg</li>
+<li>Proveedor B - Compra 1200kg</li>
+<li>Proveedor C - Compra 900kg</li>
+</ul>
+<button class="btn">Publicar Licitación</button>
+</div>
 </div>
 
 <!-- LICITACION -->
-<div id="licitacion" class="card hidden">
-<h3>Licitación</h3>
-<input type="text" placeholder="Producto">
-<input type="number" placeholder="Precio ofertado">
+<div id="licitacion" class="section hidden">
+<div class="card">
+<h3>Nueva Licitación</h3>
+<label>Tipo</label>
+<select>
+<option>Compra</option>
+<option>Venta</option>
+</select>
+<label>Volumen (kg)</label>
+<input type="number">
+<label>Fecha límite</label>
 <input type="date">
-<button>Enviar oferta</button>
-<button onclick="backMenu()">Volver</button>
+<label>Requisitos de calidad</label>
+<input type="text">
+<button class="btn">Publicar Licitación</button>
+</div>
 </div>
 
-<!-- SEGUIMIENTO -->
-<div id="seguimiento" class="card hidden">
-<h3>Seguimiento de pedidos</h3>
-<p>Pedido #001 - En proceso</p>
-<p>Pedido #002 - Entregado</p>
-<button onclick="backMenu()">Volver</button>
-</div>
-
-<!-- REPORTES -->
-<div id="reportes" class="card hidden">
-<h3>Reportes</h3>
-<p>Total compras: S/ 12,000</p>
-<p>Proveedores activos: 5</p>
-<button onclick="backMenu()">Volver</button>
-</div>
-
-</div>
-
-<script>
-function showMenu() {
-document.getElementById("login").classList.add("hidden");
-document.getElementById("menu").classList.remove("hidden");
-}
-
-function showSection(id) {
-document.getElementById("menu").classList.add("hidden");
-document.getElementById(id).classList.remove("hidden");
-}
-
-function backMenu() {
-document.getElementById("proveedores").classList.add("hidden");
-document.getElementById("licitacion").classList.add("hidden");
-document.getElementById("seguimiento").classList.add("hidden");
-document.getElementById("reportes").classList.add("hidden");
-document.getElementById("menu").classList.remove("hidden");
-}
-
-function logout() {
-document.getElementById("menu").classList.add("hidden");
-document.getElementById("login").classList.remove("hidden");
-}
-</script>
-
-</body>
-</html>
+<!-- OFERTAS -->
+<div id="ofertas" class="section hidden">
+<div class="card">
+<h3>Evaluación de Ofertas</h3>
+<table width="100%">
+<tr><th>Proveedor</th><th>Precio</th><th>Calidad</th><th>Acción</th></tr>
+<tr><td>A</td><td>S/ 5.20</td><td>Alta</td><td><button class="btn">Aceptar</button></td></tr>
+<tr><td>B</td><td>S/ 5.00</td><td>Media</td><td><button class="btn">Rechazar</button></td></tr>
+<tr><td>C</td><td>S/ 5.10</td><td>Alta</td><td><button c
